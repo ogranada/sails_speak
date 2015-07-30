@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Introducción a Sails.js</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Sails.js</h1>
+					<h2>Introducción</h2>
+					<img src="imgs/bkgd_squiddy.png" width="500px" alt="logo">
+				</section>
+				
+				<section>
+					<h2>Antes que nada</h2>
+					Esta presentación esta basada en una presentación de Nicolas Jansma
+					<a href="http://goo.gl/rnPKCU">http://goo.gl/rnPKCU</a>
+				</section>
+
+				<section>
+					<h2>Sails.js</h2>
+					<p>
+						Es un framework MVC creado por <a href="https://twitter.com/mikermcneil">Mike McNeil</a> en 2012.
+					</p>
+				</section>
+
+				<section>
+					<section id="que_es">
+						<h2>Sails.js es</h2>
+						<ul>
+							<li class="fragment">Framework MVC para desarrollo backend con Node.js/IO.js</li>
+							<li class="fragment">Construido con Express.js</li>
+							<li class="fragment">Inpirado en otros frameworks como RoR, Symfony, Django.</li>
+							<li class="fragment">Ideal para trabajo realtime (juegos, dashboards, chats).</li>						
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section id="caracteristicas">
+						<h2>características básicas de Sails.js</h2>
+						<ul>
+							<li class="fragment">100% Javascript</li>
+							<li class="fragment">Capa de abstraccion de datos compatible con multiples motores</li>
+							<li class="fragment">APIs auto generadas</li>
+							<li class="fragment">Soporta el uso de websockets y su integración con APIs</li>
+							<li class="fragment">Politicas de seguridad reusables</li>
+							<li class="fragment">Soporta el uso de muchas herramientas para frontend (motores de plantillas, herramientas js para frontend)</li>
+							<li class="fragment">Manejo simple de recursos (assets)</li>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section id="anatomia">
+						<h2>Anatomia de Sails.js</h2>
+						<ul>
+							<li class="fragment">api/controllers - controladores</li>
+							<li class="fragment">api/models - modelos</li>
+							<li class="fragment">api/policies - autenticación/autorización</li>
+							<li class="fragment">api/responses - handlers de respuestas del sistema</li>
+							<li class="fragment">api/services - servicios del sistema</li>
+							<li class="fragment">assets/ - recursos estaticos</li>
+							<li class="fragment">config/ - configuración del sistema</li>
+							<li class="fragment">tasks/ - tareas automatizadas de grunt o CLI</li>
+							<li class="fragment">views/ - vistas</li>
+						</ul>
+					</section>
+				</section>
+
+
+				<section>
+					<section id="modelos">
+						<h2>Modelos en Sails.js</h2>
+						<ul>
+							<li class="fragment">http://sailsjs.org/#!documentation/models</li>
+							<li class="fragment">Waterline ORM (Active Record, Hibernate, Mongoose)</li>
+							<pre class="fragment"><code data-trim contenteditable>
+// Bird.js
+module.exports = {
+  attributes: {
+    name: {
+      type: 'string'
+    },
+    wingspan: {
+      type: 'float',
+      required: true
+    },
+    wingspanUnits: {
+      type: 'string',
+      enum: ['cm', 'in', 'm', 'mm'],
+      defaultsTo: 'cm'
+    }
+  }
+}
+							</code></pre>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section id="controladores">
+						<h2>Controladores en Sails.js</h2>
+						<ul>
+							<li class="fragment">http://links.sailsjs.org/docs/controllers</li>
+							<li class="fragment">api/controllers</li>
+							<li class="fragment">Genera acciones crud automaticamente</li>
+							<li class="fragment">Se apoya en blueprints.js para generar shortcuts</li>
+						</ul>
+					</section>
+				</section>
+	
+				<section>
+					<section id="views">
+						<h2>Vistas en Sails.js</h2><ul>
+							<li class="fragment">Usan por defecto Jade</li>
+							<li class="fragment">Se pueden personalizar</li>
+							<pre class="fragment"><code data-trim contenteditable>
+<div>
+  <h1><%= user.name %>'s first view</h1>
+  <h2>My corndog collection:</h2>
+  <ul>
+    <% _.each(corndogs, function (corndog) { %>
+    <li><%= corndog.name %></li>
+    <% }) %>
+  </ul>
+</div>
+							</code></pre>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section id="rutas">
+						<h2>Rutas en Sails.js</h2><ul>
+							<li class="fragment">Se manejan en el archivo config/routes.js</li>
+							<li class="fragment">Se pueden modificar</li>
+							<pre class="fragment"><code data-trim contenteditable>
+// config/routes.js
+module.exports.routes = {
+  'get /signup': { view: 'conversion/signup' },
+  'post /signup': 'AuthController.processSignup',
+  'get /login': { view: 'portal/login' },
+  'post /login': 'AuthController.processLogin',
+  '/logout': 'AuthController.logout',
+  'get /me': 'UserController.profile'
+}
+							</code></pre>
+						</ul>
+					</section>
+				</section>
+
+
+				<section>
+					<section id="websockets">
+						<h2>Websockets en Sails.js</h2><ul>
+							<li class="fragment">Usa una libreria especifica de sails en el cliente</li>
+							<pre class="fragment"><code data-trim contenteditable>
+
+socket = io.connect();
+typeof console !== 'undefined' &&
+console.log('Connecting Socket.io to Sails.js...');
+socket.on('connect', function socketConnected() {
+  typeof console !== 'undefined' &&
+  console.log(
+    'Socket is now connected and globally accessible as `socket`.\n' +
+    'e.g. to send a GET request to Sails via Socket.io, try: \n' +
+    '`socket.get("/foo", function (response) { console.log(response); })`'
+  );
+
+  socket.on('message', function newMessageFromSails ( message ) {
+    typeof console !== 'undefined' &&
+    console.log('New message received from Sails ::\n', message);
+  });
+});
+							</code></pre>
+						</ul>
+					</section>
+				</section>
+
+				<section>
+					<section id="demo">
+						<h2>Demo de Sails.js</h2>
+					</section>
+				</section>
+	
+				<section>
+					<section id="preguntas">
+						<h2>Preguntas</h2>
+					</section>
+				</section>
+	
+				<section>
+					<section id="preguntas">
+						<h2>Oscar Andrés Granada</h2>
+						<h3> <a href="http://twitter.com/oagranada">@oagranada</a> </h3>
+					</section>
+				</section>
+	
+	
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
